@@ -85,3 +85,25 @@ The backend for the AirBnB Clone project is designed to replicate core functiona
 - Each **Booking** is associated with one **Payment**.
 - A **User** can write multiple **Reviews**, each linked to a specific **Property**.
 - A **Property** can have many **Reviews** from different users.
+
+---
+## 🔧 Feature Breakdown
+
+### 1. **User Authentication**
+Enables secure user registration, login, and profile management. This ensures that only verified users can access personalized services, such as booking properties or managing listings. Roles like "guest" and "host" are managed to provide tailored access and functionality.
+
+### 2. **Property Management**
+Allows hosts to create, update, and manage property listings. Each listing contains key information such as pricing, location, and availability, giving users a comprehensive view when searching for accommodations. It ensures hosts can maintain accurate, up-to-date property details.
+
+### 3. **Booking System**
+Provides a mechanism for guests to search availability and book stays at listed properties. The system validates booking dates, prevents scheduling conflicts, and manages check-in/check-out details. This feature is central to the platform’s operation and user satisfaction.
+
+### 4. **Payment Processing**
+Securely processes transactions related to property bookings using integrated payment gateways. Each booking is tied to a payment, and statuses like "pending", "success", or "failed" are tracked. This ensures reliable financial operations for both guests and hosts.
+
+### 5. **Review System**
+Enables guests to leave ratings and written feedback on properties after their stay. These reviews help maintain platform quality, build trust, and assist future users in making informed booking decisions. Hosts can also use feedback to improve their services.
+
+### 6. **Database Optimizations**
+Implements performance-enhancing techniques such as indexing and caching. These optimizations speed up data retrieval, reduce server load, and ensure the application scales efficiently as the user base grows. It's vital for maintaining a fast and responsive user experience.
+
