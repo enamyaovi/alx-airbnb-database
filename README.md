@@ -128,4 +128,23 @@ Implements performance-enhancing techniques such as indexing and caching. These 
 
 - **System Integrity**: Without proper protections like rate limiting and input validation, the backend could be exposed to DDoS attacks, spam, or data corruption. Security measures ensure the system remains stable and reliable.
 
+---
+## ⚙️ CI/CD Pipeline
+
+### What is CI/CD?
+
+CI/CD stands for **Continuous Integration** and **Continuous Deployment/Delivery**. It is a development practice that enables teams to automatically test, 
+integrate, and deploy code changes with speed and confidence. CI ensures that new code integrates well with the existing codebase by running automated tests, 
+while CD automates the release process, pushing validated changes to production or staging environments.
+
+This approach minimizes human error, speeds up delivery cycles, and improves software quality—making it essential for a scalable and evolving project like the Airbnb Clone.
+
+### Tools and Workflow
+
+- **GitHub Actions**: Automates workflows such as running unit tests, linting code, and deploying updates whenever code is pushed or merged into the main branch.
+- **Docker**: Provides isolated and reproducible environments for development, testing, and deployment, ensuring consistency across all stages.
+- **PostgreSQL & Redis Containers**: Spun up during automated tests to replicate real production environments and ensure code reliability with external services.
+
+CI/CD is critical for delivering new features, bug fixes, and security patches quickly while maintaining the overall health and stability of the application.
+
 
