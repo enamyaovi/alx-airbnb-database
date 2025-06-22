@@ -107,3 +107,25 @@ Enables guests to leave ratings and written feedback on properties after their s
 ### 6. **Database Optimizations**
 Implements performance-enhancing techniques such as indexing and caching. These optimizations speed up data retrieval, reduce server load, and ensure the application scales efficiently as the user base grows. It's vital for maintaining a fast and responsive user experience.
 
+---
+## 🔐 API Security
+
+### Key Security Measures
+
+- **Authentication**: JSON Web Tokens (JWT) will be used to securely identify users during requests. This ensures only authenticated users can access protected routes such as bookings and payments.
+  
+- **Authorization**: Role-based access control ensures that users can only perform actions permitted by their role (e.g., only hosts can list properties, only guests can make bookings). This prevents privilege abuse and enforces user boundaries.
+
+- **Rate Limiting**: API rate limiting will restrict the number of requests per user or IP address within a given time window. This helps prevent abuse such as brute force attacks and server overload.
+
+- **Input Validation & Sanitization**: All user input will be validated and sanitized to protect against common vulnerabilities like SQL injection and cross-site scripting. This ensures data integrity and protects the application from malicious inputs.
+
+### Why Security Matters
+
+- **User Data Protection**: The platform stores sensitive user data, including login credentials and personal details. Strong authentication and encryption are vital to prevent data leaks or identity theft.
+
+- **Secure Payments**: Financial transactions are central to the project. Secure handling of payment data is essential to prevent fraud and build user trust.
+
+- **System Integrity**: Without proper protections like rate limiting and input validation, the backend could be exposed to DDoS attacks, spam, or data corruption. Security measures ensure the system remains stable and reliable.
+
+
