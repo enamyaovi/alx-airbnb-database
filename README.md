@@ -147,4 +147,50 @@ This approach minimizes human error, speeds up delivery cycles, and improves sof
 
 CI/CD is critical for delivering new features, bug fixes, and security patches quickly while maintaining the overall health and stability of the application.
 
+---
+
+## 📌 API Endpoints Overview
+
+### Users
+- `GET /users/`
+- `POST /users/`
+- `GET /users/{user_id}/`
+- `PUT /users/{user_id}/`
+- `DELETE /users/{user_id}/`
+
+### Properties
+- `GET /properties/`
+- `POST /properties/`
+- `GET /properties/{property_id}/`
+- `PUT /properties/{property_id}/`
+- `DELETE /properties/{property_id}/`
+
+### Bookings
+- `GET /bookings/`
+- `POST /bookings/`
+- `GET /bookings/{booking_id}/`
+- `PUT /bookings/{booking_id}/`
+- `DELETE /bookings/{booking_id}/`
+
+### Payments
+- `POST /payments/`
+
+### Reviews
+- `GET /reviews/`
+- `POST /reviews/`
+- `GET /reviews/{review_id}/`
+- `PUT /reviews/{review_id}/`
+- `DELETE /reviews/{review_id}/`
+
+---
+
+## 📚 API Documentation
+
+- **REST API**: Compliant with OpenAPI (Swagger) standards for easy integration.
+- **GraphQL**: Offers flexible data fetching for clients needing specific nested or filtered fields.
+
+---
+
+> 💡 _This README is a living document and will evolve as the project progresses._
+
 
