@@ -1,0 +1,92 @@
+Project airbnb_clone {
+  database_type: 'MySQL'
+  Note: 'This project is a clone of Airbnb. Entities, relationships, and attributes modeled based on Airbnb-like functionality.'
+}
+
+enum user_role {
+  guest
+  host
+  admin
+}
+
+enum booking_status {
+  pending
+  confirmed
+  cancelled
+}
+
+enum payment_options {
+  credit_card
+  paypal
+  stripe
+}
+
+Table Users {
+  user_id uuid [pk]
+  first_name varchar [not null]
+  last_name varchar
+  email varchar [unique, not null]
+  password_hash varchar [not null]
+  phone_number varchar
+  role user_role [not null]
+  created_at timestamp [default: 'current_timestamp']
+
+  indexes {
+    email
+  }
+}
+
+Table Properties {
+  property_id uuid [pk]
+  host_id uuid [ref: > Users.user_id]
+  name varchar [not null]
+  description text [not null]
+  location varchar [not null]
+  price_per_night decimal [not null]
+  created_at timestamp [default: 'current_timestamp']
+  updated_at timestamp [default: 'current_timestamp']
+}
+
+Table Bookings {
+  booking_id uuid [pk]
+  property_id uuid [ref: > Properties.property_id]
+  user_id uuid [ref: > Users.user_id]
+  start_date date [not null]
+  end_date date [not null]
+  total_price decimal [not null]
+  status booking_status [not null]
+  created_at timestamp [default: 'current_timestamp']
+
+  indexes {
+    property_id
+  }
+}
+
+Table Payments {
+  payment_id uuid [pk]
+  booking_id uuid [ref: - Bookings.booking_id]
+  amount decimal [not null]
+  payment_date timestamp [default: 'current_timestamp']
+  payment_method payment_options [not null]
+
+  indexes {
+    booking_id
+  }
+}
+
+Table Reviews {
+  review_id uuid [pk]
+  property_id uuid [ref: > Properties.property_id]
+  user_id uuid [ref: > Users.user_id]
+  rating int [not null, note: 'Must be between 1 and 5']
+  comment text [not null]
+  created_at timestamp [default: 'current_timestamp']
+}
+
+Table Messages {
+  message_id uuid [pk]
+  sender_id uuid [ref: > Users.user_id]
+  recipient_id uuid [ref: > Users.user_id]
+  message_body text [not null]
+  sent_at timestamp [default: 'current_timestamp']
+}
