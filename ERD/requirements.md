@@ -122,3 +122,20 @@ The `messages` table records communication between users on the platform. Each m
 | sent_at        | TIMESTAMP   | Default: CURRENT_TIMESTAMP                | Timestamp of when the message was sent   |
 
 
+## 🧮 Normalization Procedure
+
+> **📌 Summary:**  
+> As part of optimizing the database design, a normalization audit was conducted and documented in `normalization.md`.
+
+> **⚠️ Issue Identified:**  
+> The original `properties` table violated **First Normal Form (1NF)** due to the `location` attribute potentially storing non-atomic data (e.g., full addresses or compound region-city values).
+
+> **🔍 Deeper Impact:**  
+> Further analysis showed this affected compliance with **2NF** and **3NF**, as some attributes were not fully or directly dependent on the primary key.
+
+> **✅ Resolution:**  
+> - A new `locations` table was introduced to store atomic, reusable location data (`city`, `street`).
+> - The `properties` table was updated to reference `locations` via a `location_id` foreign key.
+
+> **📂 Reference:**  
+> For full details and revised table structures, refer to the file `normalization.md`.
