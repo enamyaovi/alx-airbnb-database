@@ -139,3 +139,42 @@ The `messages` table records communication between users on the platform. Each m
 
 > **📂 Reference:**  
 > For full details and revised table structures, refer to the file `normalization.md`.
+---
+
+## 🔒 Deletion Rules & Data Integrity
+
+To keep the data in the Airbnb Clone database clean and consistent, certain **deletion restrictions** are enforced using foreign key constraints. These rules prevent accidental loss of important data or broken relationships between tables.
+
+### ⚠️ Key Restrictions:
+
+- **Users with Active Bookings**  
+  → Cannot be deleted.  
+  _(Guests or Hosts involved in current or past bookings are protected from deletion to preserve history.)_
+
+- **Properties with Active Bookings**  
+  → Cannot be deleted.  
+  _(Prevents removing listings that are already booked or linked to reviews/payments.)_
+
+- **Locations used by Properties**  
+  → Can be deleted, but the location on those properties will be set to `NULL`.  
+  _(This avoids breaking the property record while allowing location updates.)_
+
+- **Bookings linked to Payments**  
+  → Deleting a booking will also delete its related payment record.  
+  _(Handled with `ON DELETE CASCADE` for cleanup.)_
+
+- **Users linked to Messages**  
+  → If a user is deleted, their messages will remain, but the sender/recipient fields will be set to `NULL`.  
+  _(So chat history isn’t lost even if the user leaves.)_
+
+- **Users or Properties with Reviews**  
+  → If deleted, their reviews will also be deleted automatically.  
+  _(Helps maintain a clean review system.)_
+
+---
+
+### 💡 Why This Matters:
+These rules ensure that:
+- No “orphaned” records are left behind.
+- Bookings, reviews, and payments stay connected to valid users and listings.
+- Important history and financial data are not lost due to accidental deletions.

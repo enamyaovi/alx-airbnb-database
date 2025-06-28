@@ -36,16 +36,24 @@ Table Users {
   }
 }
 
+Table Location {
+  location_id uuid [pk]
+  city varchar [not null]
+  street varchar [not null]
+}
+
 Table Properties {
   property_id uuid [pk]
   host_id uuid [ref: > Users.user_id]
   name varchar [not null]
   description text [not null]
-  location varchar [not null]
+  location_id uuid [ref: - Location.location_id]
   price_per_night decimal [not null]
   created_at timestamp [default: 'current_timestamp']
   updated_at timestamp [default: 'current_timestamp']
 }
+
+
 
 Table Bookings {
   booking_id uuid [pk]
