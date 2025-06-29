@@ -1,6 +1,6 @@
 # 🏠 AirBnB Clone Backend
 
-## 🚀 Overview
+##  Overview
 
 The backend for the AirBnB Clone project is designed to replicate core functionalities of Airbnb, providing robust support for user interactions, property listings, bookings, payments, and reviews. This project enables hosts to manage properties while allowing guests to search, book, and review stays with seamless transactions.
 
