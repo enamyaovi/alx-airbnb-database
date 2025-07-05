@@ -5,7 +5,7 @@ This document outlines the key entities and their attributes for the Airbnb clon
 The visual representation of the ER diagram is saved as `erd_diagram.png`.  
 The declarative database structure is defined in `airbnb.dbml`, which contains all entity definitions and relationships in DBML format.
 
-## 🧑‍💼 User Entity
+## User Entity
 
 The `users` table stores details of all people who use the platform. A user can be a **guest**, **host**, or **admin**. This role determines their capabilities in the system.
 
@@ -23,7 +23,7 @@ The `users` table stores details of all people who use the platform. A user can 
 | created_at       | TIMESTAMP   | Default: CURRENT_TIMESTAMP| Timestamp of account creation |
 
 
-## 🏠 Property Entity
+## Property Entity
 
 The `properties` table stores listings added by users who are **hosts**. Each property is owned by a user.
 
@@ -44,7 +44,7 @@ The `properties` table stores listings added by users who are **hosts**. Each pr
 | updated_at        | TIMESTAMP   | Default: ON UPDATE CURRENT_TIMESTAMP | Auto-updates on record change |
 
 
-## 📆 Booking Entity
+## Booking Entity
 
 The `bookings` table keeps track of reservations made by users for properties listed on the platform. Each booking links a guest (`user_id`) to a property and includes dates, pricing, and status.
 
@@ -66,7 +66,7 @@ The `bookings` table keeps track of reservations made by users for properties li
 | created_at    | TIMESTAMP | Default: CURRENT_TIMESTAMP                     | Timestamp of booking creation     |
 
 
-## 💳 Payment Entity
+## Payment Entity
 
 The `payments` table stores details of financial transactions made by users for confirmed bookings. Each payment is tied to a specific booking and includes method and amount.
 
@@ -84,7 +84,7 @@ The `payments` table stores details of financial transactions made by users for 
 | payment_method   | ENUM        | NOT NULL                                        | credit_card, paypal, or stripe        |
 
 
-## 📝 Review Entity
+## Review Entity
 
 The `reviews` table stores user feedback for properties. A review includes a numeric rating and a text comment, both tied to a specific user and property.
 
@@ -104,7 +104,7 @@ The `reviews` table stores user feedback for properties. A review includes a num
 | created_at    | TIMESTAMP   | Default: CURRENT_TIMESTAMP                   | Timestamp of when the review was submitted  |
 
 
-## 💬 Message Entity
+## Message Entity
 
 The `messages` table records communication between users on the platform. Each message is sent by one user to another, and is stored with a timestamp.
 
@@ -122,30 +122,30 @@ The `messages` table records communication between users on the platform. Each m
 | sent_at        | TIMESTAMP   | Default: CURRENT_TIMESTAMP                | Timestamp of when the message was sent   |
 
 
-## 🧮 Normalization Procedure
+## Normalization Procedure
 
-> **📌 Summary:**  
+> **Summary:**  
 > As part of optimizing the database design, a normalization audit was conducted and documented in `normalization.md`.
 
-> **⚠️ Issue Identified:**  
+> **Issue Identified:**  
 > The original `properties` table violated **First Normal Form (1NF)** due to the `location` attribute potentially storing non-atomic data (e.g., full addresses or compound region-city values).
 
-> **🔍 Deeper Impact:**  
+> **Deeper Impact:**  
 > Further analysis showed this affected compliance with **2NF** and **3NF**, as some attributes were not fully or directly dependent on the primary key.
 
-> **✅ Resolution:**  
+> **Resolution:**  
 > - A new `locations` table was introduced to store atomic, reusable location data (`city`, `street`).
 > - The `properties` table was updated to reference `locations` via a `location_id` foreign key.
 
-> **📂 Reference:**  
+> **Reference:**  
 > For full details and revised table structures, refer to the file `normalization.md`.
 ---
 
-## 🔒 Deletion Rules & Data Integrity
+## Deletion Rules & Data Integrity
 
 To keep the data in the Airbnb Clone database clean and consistent, certain **deletion restrictions** are enforced using foreign key constraints. These rules prevent accidental loss of important data or broken relationships between tables.
 
-### ⚠️ Key Restrictions:
+### Key Restrictions:
 
 - **Users with Active Bookings**  
   → Cannot be deleted.  
@@ -173,7 +173,7 @@ To keep the data in the Airbnb Clone database clean and consistent, certain **de
 
 ---
 
-### 💡 Why This Matters:
+### Why This Matters:
 These rules ensure that:
 - No “orphaned” records are left behind.
 - Bookings, reviews, and payments stay connected to valid users and listings.

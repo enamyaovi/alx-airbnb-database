@@ -1,10 +1,10 @@
-# 🏠 AirBnB Clone Backend
+# AirBnB Clone Backend
 
 ##  Overview
 
 The backend for the AirBnB Clone project is designed to replicate core functionalities of Airbnb, providing robust support for user interactions, property listings, bookings, payments, and reviews. This project enables hosts to manage properties while allowing guests to search, book, and review stays with seamless transactions.
 
-### 🎯 Project Goals
+### Project Goals
 
 - **User Management**: Secure authentication and profile management.
 - **Property Management**: Feature-rich listing creation and retrieval system.
@@ -14,7 +14,7 @@ The backend for the AirBnB Clone project is designed to replicate core functiona
 - **Performance Optimization**: Caching and indexing for efficient data handling.
 
 ---
-## ⚙️ Technology Stack
+## Technology Stack
 
 | Technology | Purpose |
 |------------|---------|
@@ -28,7 +28,7 @@ The backend for the AirBnB Clone project is designed to replicate core functiona
 | **CI/CD Pipelines** |  Automated pipelines for testing and deploying code changes.|
 
 ---
-## 👥 Team Roles
+## Team Roles
 
 | Role | Description |
 |------|-------------|
@@ -38,7 +38,7 @@ The backend for the AirBnB Clone project is designed to replicate core functiona
 | **Database Administrator (DBA)** | Designs and manages the database schema for entities like Users, Properties, Bookings, and Payments. They ensure optimized queries, enforce data consistency, create indexes for fast lookups, and handle database backups and recovery for the project. |
 
 ---
-## 🗃️ Database Design
+## Database Design
 
 ### Key Entities and Fields
 
@@ -108,7 +108,7 @@ Enables guests to leave ratings and written feedback on properties after their s
 Implements performance-enhancing techniques such as indexing and caching. These optimizations speed up data retrieval, reduce server load, and ensure the application scales efficiently as the user base grows. It's vital for maintaining a fast and responsive user experience.
 
 ---
-## 🔐 API Security
+## API Security
 
 ### Key Security Measures
 
@@ -129,7 +129,7 @@ Implements performance-enhancing techniques such as indexing and caching. These 
 - **System Integrity**: Without proper protections like rate limiting and input validation, the backend could be exposed to DDoS attacks, spam, or data corruption. Security measures ensure the system remains stable and reliable.
 
 ---
-## ⚙️ CI/CD Pipeline
+## CI/CD Pipeline
 
 ### What is CI/CD?
 
@@ -149,7 +149,7 @@ CI/CD is critical for delivering new features, bug fixes, and security patches q
 
 ---
 
-## 📌 API Endpoints Overview
+## API Endpoints Overview
 
 ### Users
 - `GET /users/`
@@ -184,13 +184,13 @@ CI/CD is critical for delivering new features, bug fixes, and security patches q
 
 ---
 
-## 📚 API Documentation
+## API Documentation
 
 - **REST API**: Compliant with OpenAPI (Swagger) standards for easy integration.
 - **GraphQL**: Offers flexible data fetching for clients needing specific nested or filtered fields.
 
 ---
 
-> 💡 _This README is a living document and will evolve as the project progresses._
+>  _This README is a living document and will evolve as the project progresses._
 
 

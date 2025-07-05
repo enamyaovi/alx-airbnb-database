@@ -1,8 +1,8 @@
-# 📄 Database Schema – Airbnb Clone
+# Database Schema – Airbnb Clone
 
 This script defines the database structure for the **Airbnb Clone** backend. It includes commands for creating the database and all necessary tables, along with their relationships and constraints.
 
-## 📁 File: `schema.sql`
+## File: `schema.sql`
 
 ###  What it does:
 - Creates the main database (e.g., `airbnb_clone`).

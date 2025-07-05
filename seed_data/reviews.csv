@@ -1,0 +1,11 @@
+review_id,property_id,user_id,rating,comment,created_at
+r001-aaaa-1111-bbbb-2222cccc0001,aaa1b1b1-bbbb-1111-aaaa-1111cccc0001,1e60e02a-1a3e-4cbd-96f0-2349c4f0a001,5,Amazing stay!,2025-07-06T15:00:00
+r002-bbbb-2222-cccc-3333dddd0002,bbb2c2c2-cccc-2222-bbbb-2222dddd0002,3c2be5ad-9d29-4a4c-9322-40139f3a3c03,4,Very comfortable.,2025-07-07T16:00:00
+r003-cccc-3333-dddd-4444eeee0003,ccc3d3d3-dddd-3333-cccc-3333eeee0003,2b01f1bc-a6a9-4659-b7b3-1123b3e7a002,5,Host was great!,2025-07-08T14:00:00
+r004-dddd-4444-eeee-5555ffff0004,ddd4e4e4-eeee-4444-dddd-4444ffff0004,5e48e5c4-822b-4891-b382-1239b9a7b005,3,Could be cleaner.,2025-07-09T12:00:00
+r005-eeee-5555-ffff-6666gggg0005,eee5f5f5-ffff-5555-eeee-5555gggg0005,4d3f1b3c-71c6-44cd-ae2c-2345c4f0d004,4,Nice view.,2025-07-10T11:00:00
+r006-ffff-6666-gggg-7777hhhh0006,fff6g6g6-gggg-6666-ffff-6666hhhh0006,6f59f6d5-933c-59a2-c493-4567e8e8e006,2,Bathroom was broken.,2025-07-11T10:00:00
+r007-gggg-7777-hhhh-8888iiii0007,ggg7h7h7-hhhh-7777-gggg-7777iiii0007,7a60a7e6-a44d-6ab3-d5a4-5678f9f9f007,5,Perfect for a weekend!,2025-07-12T09:00:00
+r008-hhhh-8888-iiii-9999jjjj0008,hhh8i8i8-iiii-8888-hhhh-8888jjjj0008,8b71b8f7-b55e-7bc4-e6b5-678901010008,5,Loved the rooftop.,2025-07-13T08:00:00
+r009-iiii-9999-jjjj-0000kkkk0009,iii9j9j9-jjjj-9999-iiii-9999kkkk0009,9c82c9g8-c66f-8cd5-f7c6-789012121009,3,Noisy at night.,2025-07-14T07:00:00
+r010-jjjj-0000-kkkk-1111llll0010,jjj0k0k0-kkkk-0000-jjjj-0000llll0010,0d93d0h9-d77a-9de6-08d7-890123232010,4,Peaceful and clean.,2025-07-15T06:00:00
