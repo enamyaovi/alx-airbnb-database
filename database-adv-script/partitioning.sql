@@ -1,5 +1,6 @@
+USE airbnb_clone;
 
--- create a partitioned table
+-- Create a partitioned version of the bookings table
 CREATE TABLE bookings_partitioned (
     booking_id CHAR(36) NOT NULL,
     property_id CHAR(36),
@@ -10,10 +11,10 @@ CREATE TABLE bookings_partitioned (
     status ENUM('pending', 'confirmed', 'cancelled') NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 
-    -- Composite primary key must include the partitioning column i.e start_date
+    -- Composite primary key must include the partitioning column
     PRIMARY KEY (booking_id, start_date),
 
-    -- Supporting indexes (based on previous optimization work)
+    -- Supporting indexes for performance
     INDEX idx_property_id (property_id),
     INDEX idx_user_property_status (user_id, property_id, status)
 )
@@ -24,6 +25,17 @@ PARTITION BY RANGE (YEAR(start_date)) (
     PARTITION pmax  VALUES LESS THAN MAXVALUE
 );
 
+-- Migrate data from original bookings table
 
--- migrate the data
-INSERT INTO bookings_partitioned SELECT * FROM bookings;
+INSERT INTO bookings_partitioned (
+    booking_id, property_id, user_id, start_date, end_date, total_price, status, created_at
+)
+SELECT 
+    booking_id, property_id, user_id, start_date, end_date, total_price, status, created_at
+FROM bookings;
+
+-- Sample query to test partition performance
+
+-- EXPLAIN SELECT * 
+-- FROM bookings_partitioned 
+-- WHERE start_date BETWEEN '2023-01-01' AND '2023-12-31';

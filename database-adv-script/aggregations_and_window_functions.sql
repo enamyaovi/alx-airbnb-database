@@ -1,10 +1,34 @@
+-- Use the correct database
+USE airbnb_clone;
 
--- Use a window function (ROW_NUMBER, RANK) to rank properties based on the total number of bookings they have received.
---crude
+-- Total number of bookings made by each user
 
--- Write a query to find the total number of bookings made by each user, using the COUNT function and GROUP BY clause.
-select users.first_name, t_book.total_booking from users join (select user_id, count(*) as total_booking from bookings group by user_id) as t_book on users.user_
-id = t_book
+SELECT 
+    users.user_id,
+    CONCAT(users.first_name, ' ', users.last_name) AS guest,
+    t_book.total_booking
+FROM users 
+JOIN (
+    SELECT 
+        user_id, 
+        COUNT(*) AS total_booking 
+    FROM bookings 
+    GROUP BY user_id
+) AS t_book 
+ON users.user_id = t_book.user_id;
 
--- Use a window function (ROW_NUMBER, RANK) to rank properties based on the total number of bookings they have received.
-select samp.property_id, samp.total_bookings, row_number() over (order by samp.total_bookings desc) as booking_rownum, rank() over (order by samp.total_bookings desc) as booking_rank  from (select distinct property_id, count(*) over (partition by property_id) as total_bookings from bookings) as samp;
+--  Rank properties based on number of bookings
+-- Using ROW_NUMBER() and RANK()
+
+SELECT 
+    property_id,
+    total_bookings,
+    ROW_NUMBER() OVER (ORDER BY total_bookings DESC) AS booking_rownum,
+    RANK() OVER (ORDER BY total_bookings DESC) AS booking_rank
+FROM (
+    SELECT 
+        property_id,
+        COUNT(*) AS total_bookings
+    FROM bookings
+    GROUP BY property_id
+) AS ranked_props;

@@ -1,8 +1,4 @@
 # Optimization Report: Impact of Indexing on `users` and `bookings` Tables
-
-*Author: Cephas Tay*
-*Date: July 2025*
-
 ---
 
 ## Objective
@@ -21,7 +17,7 @@ FROM users
 WHERE email = 'richmond@mail.com' AND first_name = 'Richmond';
 ```
 
-At this stage, no supporting index existed for either `email` or `first_name`. As expected, MySQL performed a full table scan to find the matching row, inefficient and costly, especially at scale. Check [before\_index.png](./before_index.png) for a screenshot of full performance details from the SQL CLI.
+At this stage, no supporting index existed for either `email` or `first_name`. As expected, MySQL performed a full table scan to find the matching row, inefficient and costly, especially at scale. Check [before\_index.png](./before_index_users.JPG) for a screenshot of full performance details from the SQL CLI.
 
 To optimize query performance, I created the following indexes:
 
@@ -41,7 +37,7 @@ FROM users
 WHERE email = 'richmond@mail.com' AND first_name = 'Richmond';
 ```
 
-This time, the EXPLAIN output showed MySQL using the `email` index directly, achieving a `type: const` access and scanning just one row. This means the engine was able to locate the exact match through the index alone, a major performance gain. Full table filtering was avoided entirely. Refer to [after\_index.png](./after_index.png) for detailed output.
+This time, the EXPLAIN output showed MySQL using the `email` index directly, achieving a `type: const` access and scanning just one row. This means the engine was able to locate the exact match through the index alone, a major performance gain. Full table filtering was avoided entirely. Refer to [after\_index.png](./after_index_users.JPG) for detailed output.
 
 ---
 
@@ -99,7 +95,7 @@ This reduced the number of rows examined during execution and lowered the overal
 
 This shift in performance is clearly illustrated in the diagrams provided below, which offer a side-by-side comparison of query behavior:
 
-* [Before Index](./before_index.png)
-* [After Index](./after_index.png)
+* [Before Index](./before_index_users.JPG)
+* [After Index](./after_index_users.JPG)
 
 These visuals show the transition from full table scans to optimized, index-based query execution, reinforcing the value of targeted indexing in performance tuning.

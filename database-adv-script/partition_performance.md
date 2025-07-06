@@ -50,7 +50,7 @@ Refer to [after\_partition.png](./after_partition.png) for visual evidence of op
 
 ## Structural Considerations
 
-To enable partitioning on `start_date`, a composite primary key (`booking_id`, `start_date`) was introduced. This decision was made in response to MySQL's rule that all unique constraints must include the partitioned column. While it slightly complicates the schema, especially for referencing `booking_id` alone. It is a practical tradeoff when partitioning is needed for performance gains.
+To enable partitioning on `start_date`, a composite primary key (`booking_id`, `start_date`) was introduced. This decision was made in response to MySQL's rule that all unique constraints must include the partitioned column. While it slightly complicates the schema, especially for referencing `booking_id` alone, it is a practical tradeoff when partitioning is needed for performance gains.
 
 This change means that any foreign key or application logic relying solely on `booking_id` will now need to account for `start_date` as well, or rely on surrogate keys elsewhere. It’s a deviation from the simplicity of a single-column primary key, but necessary within the constraints of MySQL’s partitioning engine.
 
