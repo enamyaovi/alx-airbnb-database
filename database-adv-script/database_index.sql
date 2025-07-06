@@ -21,7 +21,6 @@ CREATE INDEX idx_property_id ON properties(property_id);
 CREATE INDEX idx_property_name ON properties(name);
 
 -- query to be run after indexing check index_performance.md
-EXPLAIN
-SELECT user_id, email, first_name, last_name, phone_number  
+EXPLAIN ANALYZE SELECT user_id, email, first_name, last_name, phone_number  
 FROM users
 WHERE email = 'richmond@mail.com' AND first_name = 'Richmond';
