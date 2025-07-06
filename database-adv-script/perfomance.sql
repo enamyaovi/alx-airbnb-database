@@ -15,6 +15,7 @@ SELECT
     pay.payment_date,
     pay.payment_method
 FROM bookings b
+WHERE u.email IS NOT NULL AND pay.amount > 200
 JOIN users u ON b.user_id = u.user_id
 JOIN properties p ON b.property_id = p.property_id
 LEFT JOIN payments pay ON b.booking_id = pay.booking_id;
@@ -39,4 +40,6 @@ SELECT
 FROM bookings b
 JOIN users u ON b.user_id = u.user_id
 JOIN properties p ON b.property_id = p.property_id
-LEFT JOIN payments pay ON b.booking_id = pay.booking_id;
+LEFT JOIN payments pay ON b.booking_id = pay.booking_id
+WHERE b.status = 'confirmed'
+AND b.start_date > '2025-01-01';
