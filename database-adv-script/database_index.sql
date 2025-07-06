@@ -19,3 +19,9 @@ CREATE INDEX idx_user_property_status ON bookings(user_id, property_id, status);
 CREATE INDEX idx_property_id ON properties(property_id);
 -- Optional: Index for sorting or filtering by property name
 CREATE INDEX idx_property_name ON properties(name);
+
+-- query to be run after indexing check index_performance.md
+EXPLAIN
+SELECT user_id, email, first_name, last_name, phone_number  
+FROM users
+WHERE email = 'richmond@mail.com' AND first_name = 'Richmond';
