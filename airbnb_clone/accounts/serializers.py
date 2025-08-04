@@ -68,9 +68,6 @@ class RegisterUserSerializer(serializers.ModelSerializer):
 
 class UserDetailSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
-        date_joined = serializers.DateTimeField(
-            source='created_at',
-            format= '%Y-%m-%d %H:%M') # type: ignore
         model = User
         fields = [
             'first_name',
@@ -78,49 +75,66 @@ class UserDetailSerializer(serializers.HyperlinkedModelSerializer):
             'email',
             'role',
             'slug',
-            'username',
-            'date_joined'
+            'created_at'
         ]
         read_only_fields = [
             'slug',
-            'username',
-            'email',
-            'date_joined'
+            'created_at'
         ]
 
-    def validate_email(self, validated_data):
+    def validate_email(self, value):
         try:
             validate_email(
-                validated_data.get('email'),
+                value,
                 check_deliverability=True
             )
+            return value
         except EmailNotValidError as err:
             raise serializers.ValidationError(f"{str(err)}")
         except Exception as err:
             raise serializers.ValidationError(f"{str(err)}")
 
     def update(self, instance, validated_data):
-
         instance.first_name = validated_data.get(
             'first_name', instance.first_name)
         instance.last_name = validated_data.get(
-            'last_name',instance.last_name)
+            'last_name', instance.last_name)
         instance.role = validated_data.get(
             'role', instance.role)
         instance.slug = validated_data.get(
             'slug', instance.slug)
+        instance.email = validated_data.get(
+            'email', instance.email)
         instance.save()
         return instance
+    
+    def save(self, **kwargs):
+        return super().save(**kwargs)
+    
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        representation['date_joined'] = representation.pop('created_at')
+        return representation
 
 class UsersListSerializer(serializers.ModelSerializer):
+    full_name = serializers.SerializerMethodField()
     class Meta:
         model = User
         fields = [
-            'username',
             'role',
-            'email'
+            'email',
+            'full_name'
         ]
-        read_only_fields = ('username', 'role', 'email')
+        read_only_fields = ('role', 'email', 'full_name')
+
+    def get_full_name(self, obj):
+        return obj.fullname
+    
+    def create(self, validated_data):
+        raise NotImplementedError
+    
+    def update(self, instance, validated_data):
+        raise NotImplementedError
 
 class PasswordChangeSerializer(serializers.Serializer):
     old_password = serializers.CharField(
@@ -130,12 +144,12 @@ class PasswordChangeSerializer(serializers.Serializer):
     confirm_password = serializers.CharField(
         required=True, max_length=40)
     
-    def validate_old_password(self, attrs):
-        o_pswd = attrs.get('old_password')
+    def validate_old_password(self, value):
         user = self.context['request'].user
-        if not user.check_password(o_pswd):
+        if not user.check_password(value):
             raise serializers.ValidationError(
                 'Wrong Password, does not match old')
+        return value
         
     def validate(self, attrs):
         if attrs.get('new_password') != attrs.get('confirm_password'):
@@ -148,12 +162,14 @@ class PasswordChangeSerializer(serializers.Serializer):
     
     def update(self, instance, validated_data):
         nw_pswd = validated_data['new_password']
-        cn_pswd = validated_data['confirm_password']
-        if nw_pswd == cn_pswd:
-            instance.set_password(cn_pswd)
-            instance.save()
+        instance.set_password(nw_pswd)
+        instance.save()
         return instance
 
     def create(self, validated_data):
-        raise NotImplementedError
+        user = User.objects.get(user_id=self.context['request'].user.user_id)
+        user.set_password(validated_data['new_password'])
+        user.save()
+        return user
+    
         

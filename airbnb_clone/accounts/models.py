@@ -135,6 +135,11 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     
     def get_absolute_url(self):
         return reverse('accounts:user-detail', kwargs={'slug':self.slug})
+    
+    @property
+    def fullname(self):
+        full_name = f"{self.first_name} {self.last_name}"
+        return full_name.title()
 
     class Meta:
         verbose_name = "User"

@@ -73,10 +73,49 @@ Welcome to my **Airbnb Clone** project. This README serves as a simple log of ke
   * Weak/common password rejection
   * Ensured `password` is write-only in response
 
----
-
 #### Notes
 
 * Registration logic is now DRY and manager-driven, avoiding issues from duplicated `set_password()` calls.
 * Serializer tests act as a foundation for future test patterns across the app.
 * Next step: expand tests for `UserDetailSerializer`, `UsersListSerializer`, and `PasswordChangeSerializer`.
+
+---
+
+### Commit 3: Accounts App Serializer Enhancements & Test Completion
+
+**Date:** 2025-08-04
+**Focus:** Finalizing Serializer Logic, Property Methods, and Test Coverage
+
+#### Changes Made:
+
+##### Core Enhancements
+
+* Added a custom model property to return users' full names.
+* Refactored the `UserDetailSerializer` to override `to_representation()` for properly formatted `date_joined` values due to test issues with datetime serialization.
+* Removed `username` field from serializer definition to align with the model (field does not exist on the model).
+* Fixed `validate_email()` method signature to accept `value` and added an explicit return to avoid `null` constraint violations during email updates.
+* Updated `UsersListSerializer` to reflect accurate `read_only_fields` based on model.
+* Added a `SerializerMethodField` in `UsersListSerializer` to expose the user full name using the model property.
+* Refactored `PasswordChangeSerializer.validate()` to return `attrs`, which was previously missing, causing unintended behavior.
+
+##### Password Logic Refactor
+
+* Rewrote both `update()` and `create()` methods of `PasswordChangeSerializer` to call `set_password()` based on whether an `instance` is passed or the user is fetched from context. This now aligns with DRF’s internal logic of invoking `update` if instance is passed, otherwise `create`.
+
+##### Test Suite Enhancements
+
+* Refactored test classes to use `setUpTestData()` where applicable for efficiency.
+* Renamed variables and methods for clearer test intent.
+* Wrote comprehensive unit tests for:
+
+  * `UserDetailSerializer`
+  * `UsersListSerializer`
+  * `PasswordChangeSerializer`
+* Used `MagicMock()` and `Faker` to isolate and modularize test inputs.
+* Manually created DB entries to validate logic as tested in Django shell.
+
+#### Notes:
+
+* Password change logic now conforms to DRF best practices and provides flexibility based on how the serializer is instantiated.
+* Tests are now complete and modular enough to serve as regression checks for future changes.
+* Next step: Document existing code and integrate permission checks and connect serializer logic to API views.
